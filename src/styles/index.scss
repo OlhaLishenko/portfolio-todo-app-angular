@@ -1,0 +1,31 @@
+:root {
+  background-color: #ffe3e8;
+  // background-image: url('../../public/bg.webp');
+  // color: white;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+}
+
+iframe {
+  display: none;
+}
+
+body {
+  margin: auto;
+}
+
+.message {
+  transition-property: opacity, min-height;
+  transition-duration: 1s;
+  min-height: 36px;
+
+  &--hidden {
+    min-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@import "./todoapp";
+@import "./todo";
+@import "./filter";

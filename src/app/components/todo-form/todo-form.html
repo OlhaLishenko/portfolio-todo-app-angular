@@ -1,0 +1,16 @@
+<form (ngSubmit)="handleFormSubmit()" [formGroup]="todoForm">
+  <div class="control has-icons-left has-icons-right">
+    <input
+      type="text"
+      class="todoapp__new-todo"
+      placeholder="What needs to be done?"
+      name="title"
+      formControlName="title"
+      [style.backgroundColor]="title.invalid && title.touched && title.dirty ? '#f88' : ''"
+    />
+
+    <span class="icon is-small is-left">
+      <i class="fas fa-arrow"></i>
+    </span>
+  </div>
+</form>
