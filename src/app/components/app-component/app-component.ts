@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Todo } from '../todo/todo';
@@ -21,6 +21,7 @@ export class AppComponent {
   todosService = inject(TodosService);
   todos$: Observable<TodoItem[]> = this.todosService.todos$;
   error$: Observable<string | null> = this.todosService.error$;
+  date = new Date();
 
   filter$ = this.route.params.pipe(map((params) => params['filter'] ?? 'all'));
   filteredTodos$ = combineLatest([this.todosService.todos$, this.filter$]).pipe(

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { catchError, EMPTY, tap } from 'rxjs';
 
 const USER_ID = 2;
-const API_URL = 'https://mat.academy/students-api';
+const API_URL = 'https://mate.academy/students-api';
 
 @Injectable({
   providedIn: 'root',

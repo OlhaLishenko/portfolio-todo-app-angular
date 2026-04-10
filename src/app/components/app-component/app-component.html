@@ -1,6 +1,6 @@
 <div class="todo-wrapper">
   <div class="todoapp">
-    <h1 class="todoapp__title">Todo List</h1>
+    <h1 class="todoapp__text todoapp__text--title">Todo List</h1>
 
     <div class="todoapp__content">
       <div class="todoapp__content-wrapper">
@@ -47,6 +47,11 @@
         </footer>
       </div>
     </div>
-    <app-message [message]="error$ | async"></app-message>
+
+    @let error = error$ | async;
+
+    @if (error !== null) {
+      <app-message [message]="error"></app-message>
+    }
   </div>
 </div>

@@ -1,18 +1,10 @@
-:root {
-  background-color: #ffe3e8;
-  // background-image: url('../../public/bg.webp');
-  // color: white;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-}
-
 iframe {
   display: none;
 }
 
-body {
-  margin: auto;
-}
+// body {
+//   margin: auto;
+// }
 
 .message {
   transition-property: opacity, min-height;
