@@ -1,7 +1,7 @@
 import { Component, Input, input } from '@angular/core';
 
 @Component({
-  selector: 'app-message',
+  selector: 'todo-message',
   imports: [],
   template: `
     <article class="message is-danger" [class.message--hidden]="message === null">

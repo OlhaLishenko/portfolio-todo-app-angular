@@ -9,9 +9,6 @@
   line-height: 1.4em;
   border-bottom: 1px solid #ededed;
 
-  &:last-child {
-    // border-bottom: 0;
-  }
 
   &__status-label {
     cursor: pointer;
@@ -30,7 +27,6 @@
 
   &__title {
     padding: 12px 15px;
-
     word-break: break-all;
     transition: color 0.4s;
   }
@@ -45,7 +41,6 @@
     right: 12px;
     top: 0;
     bottom: 0;
-
     font-size: 120%;
     line-height: 1;
     font-family: inherit;

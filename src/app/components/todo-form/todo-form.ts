@@ -1,14 +1,9 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodosService } from '../../services/todos.service';
+import { forkJoin, switchMap, take } from 'rxjs';
 @Component({
-  selector: 'app-todo-form',
+  selector: 'todo-form',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './todo-form.html',
@@ -16,24 +11,30 @@ import { TodosService } from '../../services/todos.service';
 export class TodoForm {
   todosService = inject(TodosService);
   @Output() addTodo = new EventEmitter<string>();
+  @Input() activeAmount: number = 0;
 
-  todoForm = new FormGroup({
-    title: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(3)],
-    }),
-  });
-
-  get title() {
-    return this.todoForm.get('title') as FormControl;
-  }
+  todoToAddTitle = '';
 
   handleFormSubmit() {
-    if (!this.title.valid) {
+    if (!this.todoToAddTitle) {
       return;
     }
 
-    this.addTodo.emit(this.title.value);
-    this.todoForm.reset();
+    this.addTodo.emit(this.todoToAddTitle);
+    this.todoToAddTitle = '';
+  }
+
+  makeAllCompleted() {
+    this.todosService.todos$
+      .pipe(
+        take(1),
+        switchMap((todos) => {
+          const todosToChange = todos.map((t) =>
+            t.completed === false ? { ...t, completed: true } : t,
+          );
+          return forkJoin(todosToChange.map((todo) => this.todosService.updateTodo(todo)));
+        }),
+      )
+      .subscribe();
   }
 }

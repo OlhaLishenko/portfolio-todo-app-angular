@@ -53,10 +53,8 @@ export class TodosService {
 
   updateTodo(todo: Todo) {
     return this.http.patch<Todo>(`${API_URL}/todos/${todo.id}`, todo).pipe(
-      tap(() => {
-        const updatedTodos = this._todos.value.map((t) =>
-          t.id === todo.id ? { ...t, completed: !t.completed } : t,
-        );
+      tap((updatedTodo) => {
+        const updatedTodos = this._todos.value.map((t) => (t.id === todo.id ? updatedTodo : t));
         this._todos.next(updatedTodos);
       }),
       catchError((err) => {

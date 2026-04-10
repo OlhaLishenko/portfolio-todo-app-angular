@@ -1,0 +1,34 @@
+<div class="todo-wrapper">
+  <div class="todoapp">
+    <h1 class="todoapp__text todoapp__text--title">Todo List</h1>
+
+    <div class="todoapp__content">
+      <div class="todoapp__content-wrapper">
+        <todo-form (addTodo)="addTodo($event)" [activeAmount]="(count$ | async) || 0"></todo-form>
+
+        <section class="todoapp__main">
+          @for (todo of (filteredTodos$ | async) ?? []; track todo.id) {
+            <todo-item
+              [todo]="todo"
+              (deleteTodo)="deleteTodo($event)"
+              (toggle)="toggle($event)"
+              (renameTodo)="renameTodo($event)"
+            ></todo-item>
+          }
+        </section>
+
+        <todo-footer
+          [activeAmount]="(count$ | async) || 0"
+          [filter]="(filter$ | async) || 'all'"
+          (deleteCompleted)="deleteCompleted()"
+        ></todo-footer>
+      </div>
+    </div>
+
+    @let error = error$ | async;
+
+    @if (error !== null) {
+      <todo-message [message]="error"></todo-message>
+    }
+  </div>
+</div>

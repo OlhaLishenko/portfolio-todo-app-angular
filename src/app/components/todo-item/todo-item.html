@@ -23,21 +23,11 @@
     </form>
   } @else {
     <span class="todo__title" (dblclick)="edit()">
-      {{ todo.title | lowercase }}
+      {{ todo.title }}
     </span>
 
-    <button
-      type="button"
-      class="todo__remove"
-      data-cy="TodoDelete"
-      (click)="deleteTodo.emit(todo)"
-    >
+    <button type="button" class="todo__remove" data-cy="TodoDelete" (click)="deleteTodo.emit(todo)">
       ×
     </button>
   }
-
-  <div data-cy="TodoLoader" class="modal overlay" [class.is-active]="false">
-    <div class="modal-background has-background-white-ter"></div>
-    <div class="loader"></div>
-  </div>
 </div>

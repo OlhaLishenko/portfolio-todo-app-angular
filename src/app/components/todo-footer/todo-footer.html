@@ -1,0 +1,15 @@
+<footer class="todoapp__footer">
+  <span class="todo-count"> {{ activeAmount }} items left </span>
+
+  <nav class="filter">
+    <a routerLink="/all" class="filter__link" [class.selected]="filter === 'all'">All</a>
+    <a routerLink="/active" class="filter__link" [class.selected]="filter === 'active'">Active</a>
+    <a routerLink="/completed" class="filter__link" [class.selected]="filter === 'completed'"
+      >Completed</a
+    >
+  </nav>
+
+  <button type="button" class="todoapp__clear-completed" (click)="deleteCompleted.emit()">
+    Clear completed
+  </button>
+</footer>

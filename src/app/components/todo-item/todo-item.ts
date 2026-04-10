@@ -10,25 +10,24 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { Todo as TodoItem } from '../../types/todo';
+import { Todo as TodoType } from '../../types/todo';
 import { FormsModule } from '@angular/forms';
-import { LowerCasePipe } from '@angular/common';
 import { TodosService } from '../../services/todos.service';
 @Component({
-  selector: 'app-todo',
+  selector: 'todo-item',
   standalone: true,
-  imports: [FormsModule, LowerCasePipe],
-  templateUrl: './todo.html',
+  imports: [FormsModule],
+  templateUrl: './todo-item.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Todo implements OnChanges {
+export class TodoItem implements OnChanges {
   todosService = inject(TodosService);
 
-  @Input() todo!: TodoItem;
+  @Input() todo!: TodoType;
   @Output() deleteTodo = new EventEmitter();
   @Output() toggle = new EventEmitter();
   @Output() renameTodo = new EventEmitter<{
-    todo: TodoItem;
+    todo: TodoType;
     title: string;
   }>();
 
@@ -57,7 +56,7 @@ export class Todo implements OnChanges {
       return;
     }
 
-    this.editing = false;
     this.renameTodo.emit({ todo: this.todo, title: this.title });
+    this.editing = false;
   }
 }
